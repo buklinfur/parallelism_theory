@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include <chrono>
 
 #ifndef DATA_TYPE
 #define DATA_TYPE double
