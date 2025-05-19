@@ -30,11 +30,11 @@ int main() {
 		b[i] = 5 * i;
 	vector<double> c(msize);
 
-	int potoks[] = {1, 2, 4, 7, 8, 16, 20, 40};
+	int  threads[] = {1, 2, 4, 7, 8, 16, 20, 40};
 
     
 	for (int i = 0; i < 8; i++) {
-		int thread_amount = potoks[i];
+		int thread_amount =  threads[i];
 		cout << "code started\n";
 		auto begin = chrono::steady_clock::now();
 
@@ -47,6 +47,7 @@ int main() {
 			if (threadid == thread_amount - 1) right_bound = msize - 1;
 			else right_bound = left_bound + items_per_thread;
 			for (int i = left_bound; i < right_bound; i++) {
+				c[i] = 0.0;
 				for (int j = 0; j < msize; j++)
 					c[i] += A[i][j] * b[j];
 			}
@@ -54,7 +55,7 @@ int main() {
 
 		auto end = chrono::steady_clock::now();
 		auto elapsed_ms = chrono::duration_cast<std::chrono::milliseconds>(end - begin);
-		cout << potoks[i] << " threads " << elapsed_ms.count()/1000.0 << " seconds\n";
+		cout <<  thread_amount << " threads " << elapsed_ms.count()/1000.0 << " seconds\n";
 		
 		#pragma omp barrier
 		{
